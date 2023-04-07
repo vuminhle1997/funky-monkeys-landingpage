@@ -1,0 +1,153 @@
+@font-face {
+  font-family: 'Circular';
+  src: url('fonts/CircularStd-Light.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('fonts/CircularStd-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('fonts/CircularStd-BoldItalic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('fonts/CircularStd-Light Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+body {
+  font-family: 'Circular' !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b {
+  font-weight: bold !important;
+}
+$dzekek: 0.3s all ease-out;
+$theme-colors: (
+  'primary': #ff7597,
+  'secondary': #03dac5,
+  'success': #81c784,
+  'info': #ff7d50,
+  'warning': #ffbe0b,
+  'danger': #e57373,
+  'light': rgb(248, 248, 248),
+  'dark': #333333,
+  'mordern-dark': #18181b,
+  'minablue': #0284c7,
+  'sanapink': #ec4899,
+  'momoorange': #fdba74,
+  'blue': #1e3a8a,
+  'sky': #0c4a6e,
+  'julia': #1a1b1b,
+  'rose': #ffc0cb,
+  'toan-special-color': #ad1457,
+);
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~bootstrap-icons/font/bootstrap-icons.scss';
+@import '~bootstrap/scss/bootstrap.scss';
+
+#title {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.footer-link {
+  color: white;
+}
+
+.social-link {
+  color: map-get($map: $theme-colors, $key: light);
+}
+
+.fa-brands {
+  cursor: pointer;
+  transition: 0.5s ease-in;
+  &:hover {
+    color: map-get($map: $theme-colors, $key: sanapink);
+  }
+}
+
+#introVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  filter: brightness(0.5);
+  z-index: 0;
+}
+
+#linda-content {
+  z-index: 1;
+  position: relative;
+  color: white;
+  /* From https://css.glass */
+  .twice-mina-momo-sana {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .hover-this {
+    transition: 0.3s all ease-out;
+
+    .special {
+      transition: $dzekek;
+    }
+    &:hover:not(.disabled) {
+      box-shadow: 0px 0px 52px 5px
+        rgba(map-get($map: $theme-colors, $key: sanapink), 0.77);
+      & {
+        transition: $dzekek;
+      }
+    }
+  }
+}
+
+.animate {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
