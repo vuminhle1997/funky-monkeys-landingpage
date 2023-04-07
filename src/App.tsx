@@ -9,13 +9,13 @@ import DisclaimerModal from './components/DisclaimerModal';
 import ContactModal from './components/ContactModal';
 import Loader from './components/Loader';
 import MainContent from './components/MainContent';
-import { isIE } from 'react-device-detect';
+import { isIE, isSafari } from 'react-device-detect';
 
 function App() {
   const [showDisclaimer, setShowDisclaimer] =
     useState<boolean>(false);
   const [showContact, setShowContact] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const handleDisclaimer = useCallback(() => {
     setShowDisclaimer(!showDisclaimer);
@@ -24,20 +24,19 @@ function App() {
   const handleContact = useCallback(() => {
     setShowContact(!showContact);
   }, [showContact]);
-  const isSafari = () => {
-    const ua = navigator.userAgent.toLowerCase();
-    return ua.indexOf('safari') > -1 && ua.indexOf('chrome') < 0;
-  };
   const videoParentRef: any = useRef();
   const [shouldUseImage, setShouldUseImage] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      console.log('Loaded');
+    if (document.readyState === 'complete') {
       setLoading(false);
-    });
+    } else {
+      window.addEventListener('DOMContentLoaded', () => {
+        setLoading(false);
+      });
+    }
 
-    if (isSafari() && videoParentRef.current) {
+    if (isSafari && videoParentRef.current) {
       // obtain reference to the video element
       const player = videoParentRef.current.children[0];
 
@@ -68,8 +67,14 @@ function App() {
         }, 0);
       }
     }
+
+    return () =>
+      window.removeEventListener('load', () => {
+        setLoading(true);
+      });
   }, []);
 
+  // is IE
   if (isIE) {
     return (
       <main>
@@ -97,13 +102,15 @@ function App() {
     );
   }
 
-  return !loading && !shouldUseImage ? (
-    <main id={'julia-nguyen'}>
-      <div id="222"></div>
-      <div
-        ref={videoParentRef}
-        dangerouslySetInnerHTML={{
-          __html: `
+  // Loading Done
+  if (!loading && !shouldUseImage) {
+    return (
+      <main id={'julia-nguyen'}>
+        <div id="222"></div>
+        <div
+          ref={videoParentRef}
+          dangerouslySetInnerHTML={{
+            __html: `
           <video id="introVideo" 
             autoPlay 
             muted 
@@ -114,25 +121,29 @@ function App() {
             <source src=${IntroVideo} type="video/mp4" />
           </video>
         `,
-        }}
-      />
+          }}
+        />
 
-      <div className="modals">
-        <DisclaimerModal
-          showDisclaimer={showDisclaimer}
+        <div className="modals">
+          <DisclaimerModal
+            showDisclaimer={showDisclaimer}
+            handleDisclaimer={handleDisclaimer}
+          />
+          <ContactModal
+            showContact={showContact}
+            handleContact={handleContact}
+          />
+        </div>
+        <MainContent
+          handleContact={handleContact}
           handleDisclaimer={handleDisclaimer}
         />
-        <ContactModal
-          showContact={showContact}
-          handleContact={handleContact}
-        />
-      </div>
-      <MainContent
-        handleContact={handleContact}
-        handleDisclaimer={handleDisclaimer}
-      />
-    </main>
-  ) : (
+      </main>
+    );
+  }
+
+  // Loading
+  return (
     <>
       <main>
         <Loader />
