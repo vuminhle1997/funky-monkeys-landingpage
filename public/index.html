@@ -2,17 +2,34 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/logo.svg" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="%PUBLIC_URL%/favicon.ico"
+    />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1"
     />
-    <meta name="theme-color" content="#000000" />
+    <!-- SANAPINK -->
+    <meta name="theme-color" content="#ec4899" />
+    <meta property="og:title" content="The Funky Monkeys" />
+    <meta
+      property="og:description"
+      content="Auf einzigartige Weise kombinieren weltweit renommierte Performance Künstler Akrobatik, Tanz und Comedy. Keine andere Company kann so energetische und frische Shows wie die der Funky Monkeys präsentieren. Ihr Können, ihre wilde Ausstrahlung und ihr jugendlicher Funke haben ZuschauerInnen auf der ganzen Welt beeindruckt und unterhalten."
+    />
+    <meta property="og:type" content="artist.berlin" />
+    <meta property="og:url" content="https://funky-monkeys.de" />
+    <meta property="og:image" content="%PUBLIC_URL%/or_image.jpg" />
     <meta
       name="description"
       content="Auf einzigartige Weise kombinieren weltweit renommierte Performance Künstler Akrobatik, Tanz und Comedy. Keine andere Company kann so energetische und frische Shows wie die der Funky Monkeys präsentieren. Ihr Können, ihre wilde Ausstrahlung und ihr jugendlicher Funke haben ZuschauerInnen auf der ganzen Welt beeindruckt und unterhalten."
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta property="og:video" content="%PUBLIC_URL%/intro.mp4" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -43,6 +60,35 @@
 
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
+      <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/V2hlQkVJZhE"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      style="display: none"
+    ></iframe>
     -->
+    <iframe
+      id="twice"
+      src=""
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      style="position: fixed; z-index: 1; top: 0"
+    ></iframe>
+    <script>
+      let root = document.querySelector('#twice');
+
+      window.addEventListener('keydown', function (e) {
+        if (e.shiftKey == true && e.keyCode == 79) {
+          console.log('julia nguyen');
+          root.src = 'https://www.youtube.com/embed/V2hlQkVJZhE';
+        }
+      });
+    </script>
   </body>
 </html>
