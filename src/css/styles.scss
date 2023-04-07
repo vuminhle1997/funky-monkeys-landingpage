@@ -74,6 +74,11 @@ $theme-colors: (
 
 .footer-link {
   color: white;
+  transition: $dzekek;
+
+  &:hover {
+    color: map-get($map: $theme-colors, $key: minablue);
+  }
 }
 
 .social-link {
@@ -85,6 +90,7 @@ $theme-colors: (
   transition: 0.5s ease-in;
   &:hover {
     color: map-get($map: $theme-colors, $key: sanapink);
+    animation: final-fantasy-hover-effect 1s ease-out infinite;
   }
 }
 
@@ -120,10 +126,23 @@ $theme-colors: (
     &:hover:not(.disabled) {
       box-shadow: 0px 0px 52px 5px
         rgba(map-get($map: $theme-colors, $key: sanapink), 0.77);
+      animation: final-fantasy-hover-effect 1s ease-out infinite;
       & {
         transition: $dzekek;
       }
     }
+  }
+}
+
+@keyframes final-fantasy-hover-effect {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 
