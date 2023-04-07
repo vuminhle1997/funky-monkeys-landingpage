@@ -4,6 +4,7 @@ import DisclaimerModal from './components/DisclaimerModal';
 import ContactModal from './components/ContactModal';
 import Loader from './components/Loader';
 import MainContent from './components/MainContent';
+import { isIE } from 'react-device-detect';
 
 function App() {
   const [showDisclaimer, setShowDisclaimer] =
@@ -25,6 +26,33 @@ function App() {
       setLoading(false);
     });
   }, []);
+
+  if (isIE) {
+    return (
+      <main>
+        <strong>
+          IE is not supported. Download Chrome/Opera/Firefox
+        </strong>
+        <ul>
+          <li>
+            <a href="https://www.google.com/intl/de_de/chrome/">
+              Chrome
+            </a>
+          </li>
+          <li>
+            <a href="https://www.mozilla.org/de/firefox/new/">
+              Firefox
+            </a>
+          </li>
+          <li>
+            <a href="https://www.opera.com/de/browsers/opera">
+              Safari
+            </a>
+          </li>
+        </ul>
+      </main>
+    );
+  }
 
   return !loading ? (
     <main id={'julia-nguyen'}>
