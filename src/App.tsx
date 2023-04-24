@@ -16,6 +16,7 @@ function App() {
     useState<boolean>(false);
   const [showContact, setShowContact] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [showContent, setShowContent] = useState<boolean>(false);
 
   const handleDisclaimer = useCallback(() => {
     setShowDisclaimer(!showDisclaimer);
@@ -24,18 +25,15 @@ function App() {
   const handleContact = useCallback(() => {
     setShowContact(!showContact);
   }, [showContact]);
+
+  const handleLoading = () => {
+    setLoading(false);
+  };
+
   const videoParentRef: any = useRef();
   const [shouldUseImage, setShouldUseImage] = useState(false);
 
   useEffect(() => {
-    if (document.readyState === 'complete') {
-      setLoading(false);
-    } else {
-      window.addEventListener('DOMContentLoaded', () => {
-        setLoading(false);
-      });
-    }
-
     if (isSafari && videoParentRef.current) {
       // obtain reference to the video element
       const player = videoParentRef.current.children[0];
@@ -68,11 +66,23 @@ function App() {
       }
     }
 
-    return () =>
-      window.removeEventListener('load', () => {
-        setLoading(true);
-      });
+    // Check if the page has already loaded
+    if (document.readyState === 'complete') {
+      handleLoading();
+    } else {
+      window.addEventListener('load', handleLoading, false);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener('load', handleLoading);
+    }
   }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      setTimeout(() => {
+        setShowContent(true);
+      }, 300);
+    }
+  }, [loading]);
 
   // is IE
   if (isIE) {
@@ -104,13 +114,17 @@ function App() {
 
   // Loading Done
   if (!loading && !shouldUseImage) {
-    return (
-      <main id={'julia-nguyen'}>
-        <div id="222"></div>
-        <div
-          ref={videoParentRef}
-          dangerouslySetInnerHTML={{
-            __html: `
+  }
+
+  // Loading
+  return !loading ? (
+    <main id={'julia-nguyen'} className="bg-dark">
+      <div id="222"></div>
+      <div
+        className="fade-in"
+        ref={videoParentRef}
+        dangerouslySetInnerHTML={{
+          __html: `
           <video id="introVideo" 
             autoPlay 
             muted 
@@ -121,34 +135,33 @@ function App() {
             <source src=${IntroVideo} type="video/mp4" />
           </video>
         `,
-          }}
-        />
-
-        <div className="modals">
-          <DisclaimerModal
-            showDisclaimer={showDisclaimer}
-            handleDisclaimer={handleDisclaimer}
-          />
-          <ContactModal
-            showContact={showContact}
-            handleContact={handleContact}
-          />
-        </div>
-        <MainContent
-          handleContact={handleContact}
-          handleDisclaimer={handleDisclaimer}
-        />
-      </main>
-    );
-  }
-
-  // Loading
-  return (
-    <>
-      <main>
-        <Loader />
-      </main>
-    </>
+        }}
+      />
+      {showContent && (
+        <>
+          <div className="fade-in">
+            <div className="modals">
+              <DisclaimerModal
+                showDisclaimer={showDisclaimer}
+                handleDisclaimer={handleDisclaimer}
+              />
+              <ContactModal
+                showContact={showContact}
+                handleContact={handleContact}
+              />
+            </div>
+            <MainContent
+              handleContact={handleContact}
+              handleDisclaimer={handleDisclaimer}
+            />
+          </div>
+        </>
+      )}
+    </main>
+  ) : (
+    <main>
+      <Loader />
+    </main>
   );
 }
 
