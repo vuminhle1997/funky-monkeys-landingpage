@@ -56,7 +56,7 @@ export default function MainContent({
   };
 
   const stupidClassName = classNames({
-    'col-md-4 my-3 my-md-0 we-like-mina-sana-momo':
+    'col-md-4 col-md-4 my-3 my-md-0 we-like-mina-sana-momo':
       checksToansStupidXMASRequest(),
     'col-md-6 my-3 my-md-0 we-dont-like-jennie-from-blackpink':
       !checksToansStupidXMASRequest(),
@@ -71,7 +71,7 @@ export default function MainContent({
         <img src={MINA_FROM_TWICE} alt="MINA_FROM_TWICE" />
         <img src={MINA_FROM_TWICE} alt="MINA_FROM_TWICE" />
       </div>
-      <div className="justify-content-center align-items-center d-flex flex-column vh-100">
+      <div className="justify-content-center align-items-center d-flex flex-column">
         <div className="twice-mina-momo-sana p-5 d-flex justify-content-center flex-column align-items-center">
           <h1 id="title" className="mb-3">
             THE FUNKY MONKEYS
@@ -87,8 +87,11 @@ export default function MainContent({
                   <div className="position-relative">
                     <img
                       src={ShowImg}
-                      width={300}
-                      height={300}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
                       alt="The link to the Show site."
                     />
                     <div className="position-absolute bottom-0 w-100 text-bg-dark p-3 text-center special">
@@ -111,8 +114,11 @@ export default function MainContent({
                     <div className="position-relative">
                       <img
                         src={XMAS_SHOW}
-                        width={300}
-                        height={300}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
                         alt="The link to the Show site."
                       />
                       <div className="position-absolute bottom-0 w-100 text-bg-dark p-3 text-center special">
@@ -131,8 +137,11 @@ export default function MainContent({
                   <div className="position-relative">
                     <img
                       src={WipImg}
-                      width={300}
-                      height={300}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
                       alt="The link to the Org site."
                     />
                     <div
