@@ -31,6 +31,8 @@ export default function MainContent({
   handleDisclaimer: () => void;
   handleContact: () => void;
 }) {
+  const TOANS_STUPID_BULLSHIT_REQUEST_FOR_SHUTTING_DOWN_ORG: boolean =
+    false;
   /**
    *
    * @returns boolean
@@ -56,7 +58,7 @@ export default function MainContent({
   };
 
   const stupidClassName = classNames({
-    'col-md-4 col-md-4 my-3 my-md-0 we-like-mina-sana-momo':
+    'col-md-6 my-3 my-md-0 we-like-mina-sana-momo':
       checksToansStupidXMASRequest(),
     'col-md-6 my-3 my-md-0 we-dont-like-jennie-from-blackpink':
       !checksToansStupidXMASRequest(),
@@ -130,33 +132,35 @@ export default function MainContent({
                 </a>
               </div>
             )}
-            <div className={stupidClassName} id="fm-org">
-              {/* TODO: add Org website when it is ready, with "rel" and "target" */}
-              <a href="#">
-                <div className="w-100 hover-this disabled">
-                  <div className="position-relative">
-                    <img
-                      src={WipImg}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                      alt="The link to the Org site."
-                    />
-                    <div
-                      className="position-absolute bottom-0 w-100 text-bg-dark p-3 text-center special"
-                      style={{ zIndex: 1 }}
-                    >
-                      <strong>THE FUNKY MONKEYS ORG</strong>
-                    </div>
-                    <div className="position-absolute top-0 w-100 h-100 text-bg-dark d-flex justify-content-center align-items-center opacity-75">
-                      <h2 className="opacity-100">COMING SOON</h2>
+            {TOANS_STUPID_BULLSHIT_REQUEST_FOR_SHUTTING_DOWN_ORG && (
+              <div className={stupidClassName} id="fm-org">
+                {/* TODO: add Org website when it is ready, with "rel" and "target" */}
+                <a href="#">
+                  <div className="w-100 hover-this disabled">
+                    <div className="position-relative">
+                      <img
+                        src={WipImg}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                        alt="The link to the Org site."
+                      />
+                      <div
+                        className="position-absolute bottom-0 w-100 text-bg-dark p-3 text-center special"
+                        style={{ zIndex: 1 }}
+                      >
+                        <strong>THE FUNKY MONKEYS ORG</strong>
+                      </div>
+                      <div className="position-absolute top-0 w-100 h-100 text-bg-dark d-flex justify-content-center align-items-center opacity-75">
+                        <h2 className="opacity-100">COMING SOON</h2>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            </div>
+                </a>
+              </div>
+            )}
           </div>
           <div id="socials" className="cupid my-3">
             {socials.map((s, i) => (
