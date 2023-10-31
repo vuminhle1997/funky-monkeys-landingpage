@@ -4,6 +4,7 @@ import WipImg from '../img/placeholder.jpg';
 import XMAS_SHOW from '../img/tfm-xmas.jpg';
 import MINA_FROM_TWICE from '../img/mina.jpg';
 import classNames from 'classnames';
+import Logo from '../img/logo.svg';
 
 const socials = [
   {
@@ -57,12 +58,69 @@ export default function MainContent({
     );
   };
 
+  const checkArtistDate = () => {
+    const currentStupidBullshitDate = new Date();
+
+    const stupidStartingXMASDate = new Date(
+      `October 25, ${currentStupidBullshitDate.getFullYear()}`
+    );
+    const stupidEndXMASDate = new Date(
+      `December 12, ${currentStupidBullshitDate.getFullYear()}`
+    );
+
+    const stupidStartingTimeInMS = stupidStartingXMASDate.getTime();
+    const stupidEndXMASTimeInMS = stupidEndXMASDate.getTime();
+    const currentTimeInMS = currentStupidBullshitDate.getTime();
+
+    return (
+      currentTimeInMS > stupidStartingTimeInMS &&
+      currentTimeInMS < stupidEndXMASTimeInMS
+    );
+  };
+
+  const contents = [
+    true,
+    checksToansStupidXMASRequest(),
+    checkArtistDate(),
+  ];
+
+  const trueContents = contents.filter((c) => c === true);
+
   const stupidClassName = classNames({
-    'col-md-6 my-3 my-md-0 we-like-mina-sana-momo':
-      checksToansStupidXMASRequest(),
+    'col-md-4 my-3 my-md-0 we-like-mina-sana-momo':
+      trueContents.length === 3,
     'col-md-6 my-3 my-md-0 we-dont-like-jennie-from-blackpink':
-      !checksToansStupidXMASRequest(),
+      trueContents.length === 2,
   });
+
+  const artistCallComponent = checkArtistDate() && (
+    <div className={stupidClassName} id="fm-artist-call">
+      <a href="https://forms.gle/s1an1aCATD8U9p4V9">
+        <div className="w-100 hover-this">
+          <div className="position-relative">
+            <img
+              src={Logo}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'none',
+              }}
+              alt="The link to the Artist call form site."
+            />
+            <div
+              className="position-absolute bottom-0 w-100 text-bg-dark p-3 text-center special"
+              style={{ zIndex: 1 }}
+            >
+              <strong>WE ARE HIRING</strong>
+            </div>
+            <div className="position-absolute top-0 w-100 h-100 text-bg-dark d-flex justify-content-center align-items-center opacity-75">
+              <h2 className="opacity-100">ARTIST CALL</h2>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  );
 
   return (
     <div className={'container expand'} id="linda-content">
@@ -132,6 +190,8 @@ export default function MainContent({
                 </a>
               </div>
             )}
+
+            {artistCallComponent}
             {TOANS_STUPID_BULLSHIT_REQUEST_FOR_SHUTTING_DOWN_ORG && (
               <div className={stupidClassName} id="fm-org">
                 {/* TODO: add Org website when it is ready, with "rel" and "target" */}
@@ -184,14 +244,14 @@ export default function MainContent({
             className="set-me-free my-3 text-white"
           >
             <a
-              href="#"
+              href="#contact"
               className="px-1 footer-link"
               onClick={handleContact}
             >
               Kontakt
             </a>
             <a
-              href="#"
+              href="#disclaimer"
               className="px-1 footer-link"
               onClick={handleDisclaimer}
             >

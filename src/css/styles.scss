@@ -108,6 +108,8 @@ $theme-colors: (
   z-index: 1;
   position: relative;
   color: white;
+  display: flex;
+  height: 100vh;
   /* From https://css.glass */
   .twice-mina-momo-sana {
     background: rgba(255, 255, 255, 0.2);
@@ -173,8 +175,9 @@ $theme-colors: (
 
 @media screen and (max-width: 767px) {
   #linda-content {
-    margin-top: 100px;
-    margin-bottom: 100px;
+    height: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
   }
   .position-relative {
     img {
