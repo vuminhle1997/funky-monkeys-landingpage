@@ -78,11 +78,7 @@ export default function MainContent({
     );
   };
 
-  const contents = [
-    true,
-    checksToansStupidXMASRequest(),
-    checkArtistDate(),
-  ];
+  const contents = [true, checksToansStupidXMASRequest(), false];
 
   const trueContents = contents.filter((c) => c === true);
 
@@ -93,7 +89,7 @@ export default function MainContent({
       trueContents.length === 2,
   });
 
-  const artistCallComponent = checkArtistDate() && (
+  const artistCallComponent = false && (
     <div className={stupidClassName} id="fm-artist-call">
       <a href="https://forms.gle/s1an1aCATD8U9p4V9">
         <div className="w-100 hover-this">
